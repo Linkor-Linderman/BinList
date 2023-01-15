@@ -9,7 +9,7 @@ import javax.inject.Inject
 class GetRequestListUseCase @Inject constructor(
     private val repository: BinlistRepository
 )  {
-    suspend fun invoke(): Flow<List<Request>> {
+    suspend operator fun invoke(): Flow<List<Request>> {
         return repository.getListOfRequest()
     }
 }

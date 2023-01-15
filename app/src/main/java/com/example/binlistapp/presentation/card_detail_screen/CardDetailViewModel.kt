@@ -20,11 +20,11 @@ class CardDetailViewModel @Inject constructor(
     private val _state = mutableStateOf(CardDetailState())
     val state: State<CardDetailState> = _state
 
-    private val _bin = mutableStateOf("")
-    val bin: State<String> = _bin
+    val bin = mutableStateOf("")
 
     fun getCardDetail(bin: String) {
-        if(bin.isNotBlank()){
+        val binValidationResult = useCases.validateBinUseCase(bin)
+        if(binValidationResult.successful){
         useCases.getCardDetailByBinUseCase(bin).onEach { result ->
             when(result){
                 is Resource.Success -> {
@@ -43,6 +43,8 @@ class CardDetailViewModel @Inject constructor(
                 }
             }
         }.launchIn(viewModelScope)
+        }else{
+            _state.value = CardDetailState(error = binValidationResult.messageError ?: "An unexpected error occured" )
         }
     }
 }

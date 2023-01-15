@@ -8,10 +8,7 @@ import com.example.binlistapp.data.data_sourse.RequestDatabase
 import com.example.binlistapp.data.remote.BinlistApi
 import com.example.binlistapp.data.repository.BinlistRepositoryImpl
 import com.example.binlistapp.domain.repository.BinlistRepository
-import com.example.binlistapp.domain.use_case.AddNewRequest
-import com.example.binlistapp.domain.use_case.GetCardDetailByBinUseCase
-import com.example.binlistapp.domain.use_case.GetRequestListUseCase
-import com.example.binlistapp.domain.use_case.UseCases
+import com.example.binlistapp.domain.use_case.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -54,11 +51,12 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideNoteUseCases(repository: BinlistRepository): UseCases {
+    fun provideUseCases(repository: BinlistRepository): UseCases {
         return UseCases(
             getRequestListUseCase = GetRequestListUseCase(repository),
             getCardDetailByBinUseCase = GetCardDetailByBinUseCase(repository),
-            addNewRequest = AddNewRequest(repository)
+            addNewRequest = AddNewRequest(repository),
+            validateBinUseCase = ValidateBinUseCase()
         )
     }
 }
