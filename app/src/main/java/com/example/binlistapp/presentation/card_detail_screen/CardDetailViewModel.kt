@@ -15,7 +15,7 @@ import javax.inject.Inject
 @HiltViewModel
 class CardDetailViewModel @Inject constructor(
     private val useCases: UseCases
-): ViewModel(){
+) : ViewModel() {
 
     private val _state = mutableStateOf(CardDetailState())
     val state: State<CardDetailState> = _state
@@ -24,27 +24,30 @@ class CardDetailViewModel @Inject constructor(
 
     fun getCardDetail(bin: String) {
         val binValidationResult = useCases.validateBinUseCase(bin)
-        if(binValidationResult.successful){
-        useCases.getCardDetailByBinUseCase(bin).onEach { result ->
-            when(result){
-                is Resource.Success -> {
-                    _state.value = CardDetailState(cardDetail = result.data)
-                    val request = Request(
-                        bin = bin,
-                        timestamp = System.currentTimeMillis()
-                    )
-                    useCases.addNewRequest(request)
+        if (binValidationResult.successful) {
+            useCases.getCardDetailByBinUseCase(bin).onEach { result ->
+                when (result) {
+                    is Resource.Success -> {
+                        _state.value = CardDetailState(cardDetail = result.data)
+                        val request = Request(
+                            bin = bin,
+                            timestamp = System.currentTimeMillis()
+                        )
+                        useCases.addNewRequest(request)
+                    }
+                    is Resource.Error -> {
+                        _state.value =
+                            CardDetailState(error = result.message ?: "An unexpected error occured")
+                    }
+                    is Resource.Loading -> {
+                        _state.value = CardDetailState(isLoading = true)
+                    }
                 }
-                is Resource.Error -> {
-                    _state.value = CardDetailState(error = result.message ?: "An unexpected error occured")
-                }
-                is Resource.Loading -> {
-                    _state.value = CardDetailState(isLoading = true)
-                }
-            }
-        }.launchIn(viewModelScope)
-        }else{
-            _state.value = CardDetailState(error = binValidationResult.messageError ?: "An unexpected error occured" )
+            }.launchIn(viewModelScope)
+        } else {
+            _state.value = CardDetailState(
+                error = binValidationResult.messageError ?: "An unexpected error occured"
+            )
         }
     }
 }

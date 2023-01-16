@@ -23,11 +23,14 @@ fun BinNumbersTextField(
     OutlinedTextField(
         modifier = modifier,
         value = binNumber.value,
-        onValueChange = {it ->
+        onValueChange = { it ->
             if (it.length <= maxChar)
-                binNumber.value = it},
-        keyboardOptions = KeyboardOptions(keyboardType =
-        KeyboardType.Number),
+                binNumber.value = it
+        },
+        keyboardOptions = KeyboardOptions(
+            keyboardType =
+            KeyboardType.Number
+        ),
         textStyle = LocalTextStyle.current.copy(textAlign = TextAlign.Center)
     )
 }

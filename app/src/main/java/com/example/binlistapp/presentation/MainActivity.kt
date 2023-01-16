@@ -8,7 +8,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.ui.Modifier
 import com.example.binlistapp.presentation.card_detail_screen.MainScreen
-import com.example.binlistapp.presentation.theme.BinListAppTheme
+import com.example.binlistapp.presentation.ui.theme.BinListAppTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

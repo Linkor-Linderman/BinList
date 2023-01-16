@@ -1,4 +1,4 @@
-package com.example.binlistapp.presentation.theme
+package com.example.binlistapp.presentation.ui.theme
 
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.TextStyle

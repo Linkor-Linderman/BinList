@@ -31,7 +31,7 @@ fun CardInformationTable(
         type = null,
         country = null
     ),
-){
+) {
     val uriHandler = LocalUriHandler.current
     val ctx = LocalContext.current
     Box(
@@ -79,21 +79,21 @@ fun CardInformationTable(
                 )
                 Text(
                     text =
-                    if (cardDetail.number?.length == null){
+                    if (cardDetail.number?.length == null) {
                         "? "
-                    }
-                    else {
-                        "LENGTH = ${cardDetail.number.length} "},
+                    } else {
+                        "LENGTH = ${cardDetail.number.length} "
+                    },
                     style = MaterialTheme.typography.h5,
                     color = Color.Green
                 )
                 Text(
                     text =
-                    if (cardDetail.number?.luhn == null){
+                    if (cardDetail.number?.luhn == null) {
                         "? "
-                    }
-                    else {
-                        "LUHN = " +  if (cardDetail.number.luhn) "Yes" else "No" },
+                    } else {
+                        "LUHN = " + if (cardDetail.number.luhn) "Yes" else "No"
+                    },
                     style = MaterialTheme.typography.h5,
                     color = Color.Green
                 )
@@ -123,7 +123,9 @@ fun CardInformationTable(
                     color = Color.White
                 )
                 Text(
-                    text = if (cardDetail.prepaid == null) "?" else {if (cardDetail.prepaid) "Yes" else "No" },
+                    text = if (cardDetail.prepaid == null) "?" else {
+                        if (cardDetail.prepaid) "Yes" else "No"
+                    },
                     style = MaterialTheme.typography.h5,
                     color = Color.Green
                 )
@@ -141,10 +143,10 @@ fun CardInformationTable(
                     text = if (cardDetail.country == null) "?" else "${cardDetail.country.emoji} ${cardDetail.country.name} " +
                             "(latitude: ${cardDetail.country.latitude}, longitude: ${cardDetail.country.longitude})",
                     style = MaterialTheme.typography.h5,
-                    color =  if (cardDetail.country == null) Color.Green else Color.Cyan,
+                    color = if (cardDetail.country == null) Color.Green else Color.Cyan,
                     modifier = Modifier.clickable {
-                        if (cardDetail.country?.latitude != null && cardDetail.country.longitude != null){
-                            uriHandler.openUri("https://www.google.com/maps/place/"+ "${cardDetail.country.latitude} ${cardDetail.country.longitude}" )
+                        if (cardDetail.country?.latitude != null && cardDetail.country.longitude != null) {
+                            uriHandler.openUri("https://www.google.com/maps/place/" + "${cardDetail.country.latitude} ${cardDetail.country.longitude}")
                         }
                     }
                 )
@@ -159,22 +161,22 @@ fun CardInformationTable(
                     color = Color.White
                 )
                 Text(
-                    text = if (cardDetail.bank?.city == null && cardDetail.bank?.name ==null) "? "
-                    else{
-                        if (cardDetail.bank.name!= null) "${cardDetail.bank.name} " else "" +
-                        if (cardDetail.bank.city!= null) "${cardDetail.bank.city} " else ""
-                        },
+                    text = if (cardDetail.bank?.city == null && cardDetail.bank?.name == null) "? "
+                    else {
+                        if (cardDetail.bank.name != null) "${cardDetail.bank.name} " else "" +
+                                if (cardDetail.bank.city != null) "${cardDetail.bank.city} " else ""
+                    },
                     style = MaterialTheme.typography.h5,
-                    color = if (cardDetail.bank?.city == null && cardDetail.bank?.name ==null) Color.Green else Color.Cyan,
+                    color = if (cardDetail.bank?.city == null && cardDetail.bank?.name == null) Color.Green else Color.Cyan,
 
-                )
+                    )
                 Spacer(modifier = Modifier.width(4.dp))
                 Text(
                     text = if (cardDetail.bank?.url == null) "? " else "${cardDetail.bank.url} ",
                     style = MaterialTheme.typography.h5,
                     color = if (cardDetail.bank?.url == null) Color.Green else Color.Cyan,
                     modifier = Modifier.clickable {
-                        if (cardDetail.bank?.url != null){
+                        if (cardDetail.bank?.url != null) {
                             val urlIntent = Intent(
                                 Intent.ACTION_VIEW,
                                 Uri.parse("https://" + cardDetail.bank.url)
@@ -189,7 +191,7 @@ fun CardInformationTable(
                     style = MaterialTheme.typography.h5,
                     color = if (cardDetail.bank?.phone == null) Color.Green else Color.Cyan,
                     modifier = Modifier.clickable {
-                        if (cardDetail.bank?.phone != null){
+                        if (cardDetail.bank?.phone != null) {
                             val u = Uri.parse("tel:" + cardDetail.bank.phone)
                             val i = Intent(Intent.ACTION_DIAL, u)
                             try {

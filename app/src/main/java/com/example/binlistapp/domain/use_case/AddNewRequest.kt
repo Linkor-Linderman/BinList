@@ -7,9 +7,9 @@ import javax.inject.Inject
 
 class AddNewRequest @Inject constructor(
     private val repository: BinlistRepository
-)  {
-    suspend operator fun invoke(request: Request){
-        if(request.bin.isBlank())
+) {
+    suspend operator fun invoke(request: Request) {
+        if (request.bin.isBlank())
             throw InvalidRequestException("The bin of the request can not be empty.")
         repository.insertNewRequest(request)
     }

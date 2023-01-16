@@ -22,7 +22,7 @@ import javax.inject.Singleton
 object AppModule {
     @Provides
     @Singleton
-    fun provideBinlistApi(): BinlistApi{
+    fun provideBinlistApi(): BinlistApi {
         return Retrofit.Builder()
             .baseUrl(Constants.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())

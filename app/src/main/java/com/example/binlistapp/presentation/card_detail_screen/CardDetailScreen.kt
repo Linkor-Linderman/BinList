@@ -28,19 +28,19 @@ fun MainScreen() {
     val navController = rememberNavController()
     Scaffold(
         modifier = Modifier.fillMaxSize(),
-       bottomBar = { BottomNavigationBar(navController = navController) }
+        bottomBar = { BottomNavigationBar(navController = navController) }
     ) {
         NavigationGraph(
             navController = navController,
             it
-       )
+        )
     }
 }
 
 @Composable
 fun CardDetailScreen(
     viewModel: CardDetailViewModel = hiltViewModel()
-){
+) {
     val state = viewModel.state.value
     Column(
         modifier = Modifier
@@ -57,7 +57,8 @@ fun CardDetailScreen(
         )
         BinNumbersTextField(
             modifier = Modifier.padding(16.dp),
-            binNumber = viewModel.bin)
+            binNumber = viewModel.bin
+        )
 
         Button(
             onClick = { viewModel.getCardDetail(viewModel.bin.value) }
@@ -68,7 +69,7 @@ fun CardDetailScreen(
             )
         }
         Spacer(modifier = Modifier.height(16.dp))
-        Box(modifier = Modifier.fillMaxWidth()){
+        Box(modifier = Modifier.fillMaxWidth()) {
             state.cardDetail?.let { cardDetail ->
                 CardInformationTable(
                     cardDetail = cardDetail,
@@ -78,7 +79,7 @@ fun CardDetailScreen(
                         .align(Alignment.Center)
                 )
             }
-            if (state.error.isNotBlank()){
+            if (state.error.isNotBlank()) {
                 Text(
                     text = state.error,
                     color = MaterialTheme.colors.error,
@@ -89,7 +90,7 @@ fun CardDetailScreen(
                         .align(Alignment.Center)
                 )
             }
-            if (state.isLoading){
+            if (state.isLoading) {
                 CircularProgressIndicator(
                     modifier = Modifier.align(Alignment.Center)
                 )

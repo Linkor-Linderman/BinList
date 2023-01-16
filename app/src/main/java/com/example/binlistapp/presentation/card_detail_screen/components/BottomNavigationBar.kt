@@ -18,7 +18,7 @@ import com.example.binlistapp.presentation.Screen
 @Composable
 fun BottomNavigationBar(
     navController: NavController
-){
+) {
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination
     BottomNavigation(
@@ -26,14 +26,13 @@ fun BottomNavigationBar(
         contentColor = Color.White
     ) {
         BottomNavigationItem(
-            selected =  currentDestination?.hierarchy?.any { it.route == Screen.CardDetailScreen.route} == true,
+            selected = currentDestination?.hierarchy?.any { it.route == Screen.CardDetailScreen.route } == true,
             onClick = {
-                navController.navigate(Screen.CardDetailScreen.route){
+                navController.navigate(Screen.CardDetailScreen.route) {
                     popUpTo(navController.graph.findStartDestination().id) {
                         saveState = true
                     }
                     launchSingleTop = true
-                    // Restore state when reselecting a previously selected item
                     restoreState = true
                 }
             },
@@ -45,14 +44,13 @@ fun BottomNavigationBar(
             },
         )
         BottomNavigationItem(
-            selected = currentDestination?.hierarchy?.any { it.route == Screen.RequestListScreen.route} == true,
+            selected = currentDestination?.hierarchy?.any { it.route == Screen.RequestListScreen.route } == true,
             onClick = {
-                navController.navigate(Screen.RequestListScreen.route){
+                navController.navigate(Screen.RequestListScreen.route) {
                     popUpTo(navController.graph.findStartDestination().id) {
                         saveState = true
                     }
                     launchSingleTop = true
-                    // Restore state when reselecting a previously selected item
                     restoreState = true
                 }
             },

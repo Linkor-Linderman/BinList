@@ -17,9 +17,9 @@ class GetCardDetailByBinUseCase @Inject constructor(
             emit(Resource.Loading<CardDetail>())
             val cardDetail = repository.getCardDetailByBin(bin)
             emit(Resource.Success<CardDetail>(cardDetail))
-        }catch (e: HttpException){
+        } catch (e: HttpException) {
             emit(Resource.Error<CardDetail>(e.localizedMessage ?: "An unexpected error occured"))
-        } catch (e: IOException){
+        } catch (e: IOException) {
             emit(Resource.Error<CardDetail>("Could not reach server. Check your internet connection"))
         }
     }
