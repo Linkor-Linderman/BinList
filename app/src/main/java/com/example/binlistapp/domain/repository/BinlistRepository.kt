@@ -9,5 +9,5 @@ interface BinlistRepository {
 
     suspend fun insertNewRequest(request: Request)
 
-    suspend fun getListOfRequest(): Flow<List<Request>>
+    fun getListOfRequest(): Flow<List<Request>>
 }

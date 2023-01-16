@@ -141,7 +141,7 @@ fun CardInformationTable(
                     text = if (cardDetail.country == null) "?" else "${cardDetail.country.emoji} ${cardDetail.country.name} " +
                             "(latitude: ${cardDetail.country.latitude}, longitude: ${cardDetail.country.longitude})",
                     style = MaterialTheme.typography.h5,
-                    color = Color.Green,
+                    color =  if (cardDetail.country == null) Color.Green else Color.Cyan,
                     modifier = Modifier.clickable {
                         if (cardDetail.country?.latitude != null && cardDetail.country.longitude != null){
                             uriHandler.openUri("https://www.google.com/maps/place/"+ "${cardDetail.country.latitude} ${cardDetail.country.longitude}" )
@@ -165,14 +165,14 @@ fun CardInformationTable(
                         if (cardDetail.bank.city!= null) "${cardDetail.bank.city} " else ""
                         },
                     style = MaterialTheme.typography.h5,
-                    color = Color.Green,
+                    color = if (cardDetail.bank?.city == null && cardDetail.bank?.name ==null) Color.Green else Color.Cyan,
 
                 )
                 Spacer(modifier = Modifier.width(4.dp))
                 Text(
                     text = if (cardDetail.bank?.url == null) "? " else "${cardDetail.bank.url} ",
                     style = MaterialTheme.typography.h5,
-                    color = Color.Green,
+                    color = if (cardDetail.bank?.url == null) Color.Green else Color.Cyan,
                     modifier = Modifier.clickable {
                         if (cardDetail.bank?.url != null){
                             val urlIntent = Intent(
@@ -187,7 +187,7 @@ fun CardInformationTable(
                 Text(
                     text = if (cardDetail.bank?.phone == null) "? " else cardDetail.bank.phone,
                     style = MaterialTheme.typography.h5,
-                    color = Color.Green,
+                    color = if (cardDetail.bank?.phone == null) Color.Green else Color.Cyan,
                     modifier = Modifier.clickable {
                         if (cardDetail.bank?.phone != null){
                             val u = Uri.parse("tel:" + cardDetail.bank.phone)

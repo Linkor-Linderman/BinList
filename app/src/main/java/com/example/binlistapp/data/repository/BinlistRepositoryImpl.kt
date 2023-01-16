@@ -21,7 +21,7 @@ class BinlistRepositoryImpl @Inject constructor(
         dao.insertRequest(request)
     }
 
-    override suspend fun getListOfRequest(): Flow<List<Request>> {
+    override fun getListOfRequest(): Flow<List<Request>> {
         return dao.getRequests()
     }
 }

@@ -10,7 +10,13 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.example.binlistapp.presentation.Screen
 import com.example.binlistapp.presentation.card_detail_screen.CardDetailScreen
+import com.example.binlistapp.presentation.card_detail_screen.MainScreen
+import com.example.binlistapp.presentation.request_list.RequestListScreen
 import com.example.binlistapp.ui.theme.BinListAppTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -20,12 +26,11 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             BinListAppTheme {
-                // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    CardDetailScreen()
+                   MainScreen()
                 }
             }
         }
